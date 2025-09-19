@@ -660,6 +660,181 @@
             padding: 2px 6px;
         }
     }
+
+
+.photo-gallery {
+    width: 100%;
+    max-width: 600px; /* Увеличил с 400px до 600px */
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1.8s forwards 0.5s;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gallery-container {
+    position: relative;
+    width: 400px; /* Увеличил с 320px до 450px */
+    height: 530px; /* Увеличил с 430px до 600px */
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(255, 0, 60, 0.6);
+    border: 3px solid #ff4d8d;
+}
+
+.gallery-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.gallery-slide.active {
+    opacity: 1;
+}
+
+.gallery-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-prev, .gallery-next {
+    position: relative;
+    background: rgba(90, 0, 20, 0.7);
+    border: 2px solid #ff4d8d;
+    color: #ffd6e0;
+    width: 50px; /* Увеличил стрелки */
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    margin: 0 20px; /* Увеличил отступ от фото */
+    flex-shrink: 0;
+}
+
+.gallery-prev:hover, .gallery-next:hover {
+    background: rgba(120, 0, 30, 0.9);
+    color: #ffffff;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
+}
+
+.gallery-indicators {
+    position: absolute;
+    bottom: 20px; /* Увеличил отступ */
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 12px; /* Увеличил расстояние между индикаторами */
+    z-index: 10;
+}
+
+.indicator {
+    width: 14px; /* Увеличил индикаторы */
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    background: #ff4d8d;
+    transform: scale(1.2);
+}
+
+/* Адаптивность для галереи */
+@media (max-width: 900px) {
+    .photo-gallery {
+        max-width: 500px;
+    }
+    
+    .gallery-container {
+        width: 380px;
+        height: 500px;
+    }
+    
+    .gallery-prev, .gallery-next {
+        width: 45px;
+        height: 45px;
+        margin: 0 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .photo-gallery {
+        max-width: 450px;
+    }
+    
+    .gallery-container {
+        width: 400px;
+        height: 530px;
+    }
+    
+    .gallery-prev, .gallery-next {
+        width: 40px;
+        height: 40px;
+        margin: 0 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-gallery {
+        max-width: 350px;
+    }
+    
+    .gallery-container {
+        width: 250px;
+        height: 350px;
+    }
+    
+    .gallery-prev, .gallery-next {
+        width: 35px;
+        height: 35px;
+        margin: 0 10px;
+    }
+    
+    .gallery-indicators {
+        bottom: 15px;
+    }
+    
+    .indicator {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .photo-gallery {
+        max-width: 300px;
+    }
+    
+    .gallery-container {
+        width: 300px;
+        height: 340px;
+    }
+    
+    .gallery-prev, .gallery-next {
+        width: 32px;
+        height: 32px;
+        margin: 0 8px;
+    }
+}
     </style>
 </head>
 <body>
@@ -686,9 +861,41 @@
     <!-- Главный контент -->
     <main class="container">
         <section class="hero">
-            <div class="photo-container">
-                <img src="Девушка.jpg" alt="Марина" class="profile-photo">
-            </div>
+            <div class="photo-gallery">
+    <div class="photo-gallery">
+    <button class="gallery-prev"><i class="fas fa-chevron-left"></i></button>
+    
+    <div class="gallery-container">
+        <div class="gallery-slide active">
+            <img src="Девушка.jpg" alt="Марина" class="gallery-photo">
+        </div>
+        <div class="gallery-slide">
+            <img src="Девушка2.jpg" alt="Анна" class="gallery-photo">
+        </div>
+        <div class="gallery-slide">
+            <img src="Девушка3.jpg" alt="Ольга" class="gallery-photo">
+        </div>
+        <div class="gallery-slide">
+            <img src="Девушка4.jpg" alt="Мария" class="gallery-photo">
+        </div>
+        <div class="gallery-slide">
+            <img src="Девушка5.jpg" alt="Светлана" class="gallery-photo">
+        </div>
+        
+        <!-- Индикаторы -->
+        <div class="gallery-indicators">
+            <span class="indicator active" data-index="0"></span>
+            <span class="indicator" data-index="1"></span>
+            <span class="indicator" data-index="2"></span>
+            <span class="indicator" data-index="3"></span>
+            <span class="indicator" data-index="4"></span>
+        </div>
+    </div>
+    
+    <button class="gallery-next"><i class="fas fa-chevron-right"></i></button>
+</div>
+    </div>
+</div>
             
             <div class="description" id="about">
                 <h1>Элитные услуги для изысканных мужчин</h1>
@@ -775,7 +982,7 @@
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
+            if (scrollTop > lastScrollTop && scrollTop > 50) {
                 // Прокрутка вниз
                 header.classList.add('hidden');
             } else {
@@ -797,6 +1004,63 @@
             }, 10);
         }
     }, 4000);
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.gallery-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    const prevBtn = document.querySelector('.gallery-prev');
+    const nextBtn = document.querySelector('.gallery-next');
+    let currentSlide = 0;
+    
+    // Функция показа слайда
+    function showSlide(index) {
+        // Скрываем все слайды
+        slides.forEach(slide => slide.classList.remove('active'));
+        indicators.forEach(indicator => indicator.classList.remove('active'));
+        
+        // Показываем выбранный слайд
+        slides[index].classList.add('active');
+        indicators[index].classList.add('active');
+        
+        currentSlide = index;
+    }
+    
+    // Следующий слайд
+    function nextSlide() {
+        let nextIndex = (currentSlide + 1) % slides.length;
+        showSlide(nextIndex);
+    }
+    
+    // Предыдущий слайд
+    function prevSlide() {
+        let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prevIndex);
+    }
+    
+    // Обработчики событий
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    
+    // Обработчики для индикаторов
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => showSlide(index));
+    });
+    
+    // Автопрокрутка (опционально)
+    let galleryInterval = setInterval(nextSlide, 5000);
+    
+    // Остановка автопрокрутки при наведении
+    const galleryContainer = document.querySelector('.gallery-container');
+    galleryContainer.addEventListener('mouseenter', () => {
+        clearInterval(galleryInterval);
+    });
+    
+    galleryContainer.addEventListener('mouseleave', () => {
+        galleryInterval = setInterval(nextSlide, 7000);
+    });
+});
     </script>
 </body>
 </html>
